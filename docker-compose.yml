@@ -1,0 +1,17 @@
+services:
+  # Aqui definimos o nosso serviço de Banco de Dados
+  db:
+    image: postgres:15 # Baixa a imagem oficial do Postgres versão 15
+    container_name: game_analytics_db # O nome que aparecerá no seu Docker
+    restart: always
+    environment:
+      POSTGRES_USER: admin # Usuário do banco
+      POSTGRES_PASSWORD: secret_password # Senha (depois mudaremos)
+      POSTGRES_DB: game_data # Nome do nosso banco de dados
+    ports:
+      - "5432:5432" # Mapeia a porta do container (5432) para a sua máquina
+    volumes:
+      - db_data:/var/lib/postgresql/data # Persistência: os dados não somem se o container cair
+
+volumes:
+  db_data: # Define onde os dados serão salvos fisicamente na sua máquina
